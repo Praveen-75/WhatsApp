@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="/stylesheets/style.css">
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+     <div id="main">
+          <div class="schat">
+               <div class="logged">
+                    <img class="status1" src="/images/story/<%= user.story %>" alt="">
+                    <img class="status" src="/images/uploads/<%= user.profilePic %>" alt="">
+                    <!-- <video class="status" src="/images/story/<%= user.story %>"></video> -->
+                    <form id="storyform" action="/story" method="post" enctype="multipart/form-data">
+                         <input id="storyinp" type="file" name="story">
+                         <input type="submit">
+                    </form>
+                    <a href="/StoryView/<%= user.username %>"><h3><%= user.name %></a>
+               </div>
+               <% data1.reverse().forEach(function(data){ %>
+                    <a href="/StoryView/<%= data.username %>">
+                         <div class="mainchat">
+                              <% if(!data.read){ %>
+                                   <div id="read"></div>
+                              <%  } %>
+                              <!-- <div id="1" class="profile"><img src="/images/uploads/<%= data.profilePic %>" alt=""></div> -->
+                              <div class="profile"><img src="/images/story/<%= data.story %>" alt=""></div>
+                              <div class="msg"><h3><%= data.name %></h3></div>
+                         </div>
+                    </a>
+               <% }) %> 
+          </div>
+
+          <div class="story">
+               <div class="back">
+                    <a href="/profile"><i class="ri-close-fill"></i></a>
+               </div>
+               <i class="ri-refresh-line"></i>
+               <h3>Click on a contact to view their status updates</h3>
+          </div>
+
+
+
+          <div class="overlay">
+               <div class="overtxt">
+                    <img src="/images/uploads/<%= data.profilePic %>" alt="">
+                    <h3><%= data.name %></h3>
+                    <div class="oright">
+                         <i class="ri-pause-fill"></i>
+                         <i class="ri-volume-up-line"></i>
+                    </div>
+               </div>
+
+               <img src="/images/story/<%= data.story %>" alt="">
+               <div id="progres">
+                    <div id="growth"></div>
+               </div>
+
+               <div class="back">
+                    <a href="/Story"><i class="ri-close-fill"></i></a>
+               </div>
+               
+          </div>
+     </div>
+
+     <script>
+          setTimeout(function(){
+               document.querySelector(".overlay")
+               .style.display = "none";
+          },3000)
+
+          var grow = 0;
+          var ghadi = setInterval(function(){
+               if(grow < 100){
+                    grow++;
+                    document.querySelector("#growth").style.width = grow + "%";
+               }else{
+                    grow = 0;
+                    document.querySelector("#growth").style.width = grow + "%";
+                    clearInterval(ghadi);
+               }
+          },30)
+     </script>
+     <script src="/javascripts/story.js"></script>  
+</body>
+</html>

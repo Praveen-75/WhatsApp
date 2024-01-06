@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="/stylesheets/style.css">
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+     <div id="main">
+          <div class="schat">
+               
+               <div class="logged">
+                    <% if(!user.read){ %>
+                         <div id="read"></div>
+                    <%  } %>
+                    <img class="status1" src="/images/story/<%= user.story %>" alt="">
+                    <img class="status" src="/images/uploads/<%= user.profilePic %>" alt="">
+                    <!-- <video class="status" src="/images/story/<%= user.story %>"></video> -->
+                    <form id="storyform" action="/story" method="post" enctype="multipart/form-data">
+                         <input id="storyinp" type="file" name="story">
+                         <input type="submit">
+                    </form>
+                    <a href="/StoryView/<%= user.username %>"><h3><%= user.name %></a>
+               </div>
+
+               <% data.reverse().forEach(function(data){ %>
+                    <a href="/StoryView/<%= data.username %>">
+                         <div class="mainchat">
+                              <% if(!data.read){ %>
+                                   <div id="read"></div>
+                              <%  } %>
+                              <div id="1" class="profile"><img src="/images/story/<%= data.story %>" alt=""></div>
+                              <!-- <div class="profile"><a href="/Story/<%= data.username %>"><img src="/images/uploads/<%= data.profilePic %>" alt=""></a></div> -->
+                              <div class="msg"><h3><%= data.name %></h3></div>
+                         </div>
+                    </a>
+               <% }) %> 
+          </div>
+
+          <div class="story">
+               <div class="back">
+                    <a href="/profile"><i class="ri-close-fill"></i></a>
+               </div>
+               <i class="ri-refresh-line"></i>
+               <h3>Click on a contact to view their status updates</h3>
+          </div>
+     </div>
+
+
+     <script src="/javascripts/story.js"></script>   
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="/stylesheets/style.css">
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+     <div id="main">
+          <div class="card">
+               <div class="photo1">
+                    <h1><i class="ri-arrow-left-line"></i><h3>Profile</h3></a></h1>
+                    <div class="photo"><img src="/images/uploads/<%= data1.profilePic %>" alt=""></div>
+                    <form id="photoform" action="/photo" method="post" enctype="multipart/form-data">
+                         <input id="fileinp" type="file" name="image">
+                         <input type="submit">
+                    </form>
+                    <div class="txt">
+                         <h1><span>Name: </span> <%= data1.name %></h1><hr>
+                         <h1><span>Mobile Number: </span> <%= data1.mobile %></h1><hr>
+                         <h1><span>About: </span><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. A cum suscipit aliquam in dolore esse iusto, neque error alias perferendis?</p></h1><hr>
+                    </div>
+               </div>
+               <div class="nav">
+                    <div class="photos"><img src="/images/uploads/<%= data1.profilePic %>" alt=""></div>
+                    <div class="iccon">
+                         <a href="/Story"><i class="ri-refresh-line"></i></a>
+                         <i class="ri-add-line"></i>
+                         <i class="ri-more-line"></i>
+                    </div>
+               </div>
+
+               <div class="search">
+                    <i class="ri-search-line"></i>
+                    <form action="">
+                         <input id="myInput" type="text" placeholder="Search..." onkeyup="search()">
+                    </form>
+               </div>
+     
+               <div class="chat">
+                    <% data.forEach(function(data){ %>
+                         <a href="/chat/<%= data.username %>">
+                              <div class="mainchat">
+                                   <div class="profile"><img src="/images/uploads/<%= data.profilePic %>" alt=""></div>
+                                   <div class="msg"><h3><%= data.name %></h3></div>
+                              </div>
+                         </a>
+                    <% }) %>     
+               </div>
+          </div>
+
+          <div class="right">
+               <img src="/images/uploads/1366_2000-removebg-preview.png" alt=""> 
+               <div class="imgtxt">
+                    <h1>WhatsApp for Desktop</h1>
+                    <h3>Send receive messages without keeping your phone online.</h3>
+                    <h3>Use WhatsApp on up to 4 linked divices & 1 phone at the same time</h3>
+               </div>    
+          </div>
+     </div>
+
+     
+     <script>
+          document.querySelector(".photos")
+          .addEventListener("click",function(){
+               document.querySelector(".photo1").style.transform = "translate(.5%)";
+          })
+          document.querySelector(".ri-arrow-left-line")
+          .addEventListener("click",function(){
+               document.querySelector(".photo1").style.transform = "translate(-105%)";
+          })
+
+          document.querySelector(".photo")
+          .addEventListener("click",function(){
+               document.querySelector("#fileinp").click();
+          })
+          document.querySelector("#fileinp")
+          .addEventListener("change",function(){
+               document.querySelector("#photoform").submit();
+          })
+     </script>
+     <script src="/javascripts/profile.js"></script>
+</body>
+</html>
